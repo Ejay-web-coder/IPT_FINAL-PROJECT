@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
     body {
-    background: url('Picture/online-job-search.jpeg') no-repeat center center fixed;
+    background: url('online-job-search.jpeg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -14,6 +14,32 @@
     align-items: center;
     margin: 0;
 }
+.back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            user-select: none;
+            text-decoration: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .back-button img {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
 .container {
     display: flex;
     background: rgba(255, 255, 255, 0.9);
@@ -98,10 +124,13 @@
     </style>
 </head>
 <body>
+<a aria-label="Go back" class="back-button" href="Start.php">
+   <img alt="Left arrow icon" height="16" src="back.png" width="16"/>
+  </a>
 <div class="container">
         <div class="left">
             <div class="logo">
-                <img class="logoimg" src="Picture/193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="">
+                <img class="logoimg" src="193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="">
             </div>
             <p>Employment Opportunities for College Students at <br>OMSC — Mamburao Campus</p>
         </div>

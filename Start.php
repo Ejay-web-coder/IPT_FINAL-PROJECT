@@ -8,46 +8,38 @@
 
     body {
       margin: 0;
-      font-family: 'Roboto Slab', serif;
+      font-family: 'Times New Roman', serif;
       background-color: white;
       color: black;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 2rem 5rem;
+      padding: 40px 80px;
     }
-
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 5px;
       user-select: none;
     }
-
     .logo .e {
-      font-weight: 800;
-      font-size: 2.5rem;
+      font-weight: bold;
+      font-size: 40px;
       color: #8B8BE6;
     }
-
     .logo .c {
-      font-weight: 800;
-      font-size: 2.5rem;
+      font-weight: bold;
+      font-size: 40px;
       color: #00E676;
     }
-
     .logo .s {
-      font-weight: 800;
-      font-size: 2.5rem;
+      font-weight: bold;
+      font-size: 40px;
       color: #0066FF;
     }
-
     .logo svg {
       width: 28px;
       height: 28px;
@@ -57,63 +49,54 @@
       stroke-linejoin: round;
       fill: none;
     }
-
     .seal {
       width: 80px;
       height: 80px;
       object-fit: contain;
     }
-
     main {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 0 5rem 5rem 5rem;
-      gap: 2.5rem;
+      padding: 0 80px 40px 80px;
+      gap: 40px;
       flex-wrap: wrap;
     }
-
     .content {
       max-width: 480px;
-      flex: 1 1 480px;
+      flex-grow: 1;
     }
-
     h2 {
       color: #8B8BE6;
       font-weight: 600;
-      font-size: 1.75rem;
+      font-size: 24px;
       line-height: 1.4;
-      margin-bottom: 1.5rem;
+      margin-bottom: 24px;
     }
-
     p {
-      font-family: Georgia, serif;
-      font-size: 1rem;
+      font-family: 'Times New Roman', serif;
+      font-size: 16px;
       line-height: 1.6;
-      margin-bottom: 2rem;
+      margin-bottom: 32px;
     }
-
     details {
       border: 1px solid #d1d5db;
       max-width: 280px;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 16px;
     }
-
     summary {
       list-style: none;
       cursor: pointer;
-      padding: 0.5rem 1rem;
+      padding: 8px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       user-select: none;
     }
-
     summary::-webkit-details-marker {
       display: none;
     }
-
     summary svg {
       width: 20px;
       height: 20px;
@@ -124,77 +107,69 @@
       fill: none;
       transition: transform 0.3s ease;
     }
-
     details[open] summary svg {
       transform: rotate(180deg);
     }
-
     ul {
       margin: 0;
       padding: 0;
       list-style: none;
       border-top: 1px solid #d1d5db;
     }
-
     ul li {
       border-top: 1px solid #d1d5db;
-      padding: 0.5rem 0;
-      font-weight: 700;
+      padding: 8px 0;
+      font-weight: bold;
       text-align: center;
       cursor: pointer;
       user-select: none;
     }
-
     ul li:hover {
       background-color: #f3f4f6;
     }
-
+    ul li a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     .image-container {
-      flex: 1 1 400px;
+      flex-grow: 1;
+      max-width: 400px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-
     .image-container img {
       max-width: 100%;
       height: auto;
       display: block;
     }
-
     @media (max-width: 768px) {
       header {
-        padding: 1.5rem 2rem;
+        padding: 24px 32px;
       }
       main {
-        padding: 0 2rem 3rem 2rem;
+        padding: 0 32px 24px 32px;
         flex-direction: column;
         align-items: flex-start;
       }
       .content, .image-container {
-        flex: 1 1 100%;
         max-width: 100%;
+        flex-grow: unset;
       }
       h2 {
-        font-size: 1.5rem;
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo" aria-label="EQCS logo">
-      <span class="e">E</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" >
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <span class="c">C</span>
-      <span class="s">S</span>
-    </div>
+    
     <img
-      src="https://storage.googleapis.com/a1aa/image/bb8ac882-6e0b-42cb-3904-844833f8b05e.jpg"
-      alt="Seal of Occidental Mindoro State College, circular emblem with yellow and blue colors"
+      src="193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png"
       class="seal"
       width="80"
       height="80"
@@ -214,16 +189,15 @@
           </svg>
         </summary>
         <ul>
-          <li>Student</li>
-          <li>Organization</li>
-          <li>Admin</li>
+          <li><a href="login_Student.php">Student</a></li>
+          <li><a href="login_Org.php">Organization</a></li>
+          <li><a href="Login_admin.php">Admin</a></li>
         </ul>
       </details>
     </section>
     <section class="image-container">
       <img
-        src="https://storage.googleapis.com/a1aa/image/7fa42115-3684-4c74-f394-3f10e9afa5c2.jpg"
-        alt="Illustration of hands holding a tablet with a magnifying glass over a document showing the text 'JOB OFFER' in red, with papers and an envelope in the background"
+        src="JOB.avif"
         width="400"
         height="300"
       />

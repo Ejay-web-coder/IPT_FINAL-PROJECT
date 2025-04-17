@@ -9,7 +9,7 @@
         margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('Picture/online-job-search.jpeg');
+            background-image: url('online-job-search.jpeg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -142,7 +142,7 @@ background-color: #8E44AD;
 <div class="container">
         <div class="content">
             <div class="left">
-                <img src="Picture/193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="EQCS Logo">
+                <img src="193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="EQCS Logo">
                 <h1>Employment Opportunities for College Students at OMSC Mamburao Campus</h1>
             </div>
             <div class="right">

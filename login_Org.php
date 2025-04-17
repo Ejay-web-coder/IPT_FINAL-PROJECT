@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
     body {
-    background: url('Picture/online-job-search.jpeg') no-repeat center center fixed;
+    background: url('online-job-search.jpeg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -101,7 +101,7 @@
 <div class="container">
         <div class="left">
             <div class="logo">
-                <img class="logoimg" src="Picture/193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="">
+                <img class="logoimg" src="193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="">
             </div>
             <p>Employment Opportunities for College Students at <br>OMSC — Mamburao Campus</p>
         </div>
