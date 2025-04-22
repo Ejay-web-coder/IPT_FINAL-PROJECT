@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up</title>
     <style>
-        body {
+         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('online-job-search.jpeg');
+            background-image: url('');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -104,68 +104,129 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            user-select: none;
+            text-decoration: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .back-button img {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
     </style>
 </head>
 <body>
+<a aria-label="Go back" class="back-button" href="Start.php">
+   <img alt="Left arrow icon" height="16" src="back.png" width="16"/>
+  </a>
 <div class="container">
-        <div class="left-panel">
-            <img src="193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="EQCS Logo">
-            <h1>Employment Opportunities for College Students at OMSC Mamburao Campus</h1>
-        </div>
-        <div class="right-panel">
-            <h2>Sign Up</h2>
-            <form>
-                <div class="form-group">
-                    <label>Complete Name:</label>
-                    <input type="text">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number:</label>
-                    <input type="text">
-                </div>
-                <div class="form-group">
-                    <label>Email Address:</label>
-                    <input type="email">
-                </div>
-                <div class="form-group">
-                    <label>Birthday:</label>
-                    <div class="radio-group">
-                        <select>
-                            <option>Mar</option>
-                        </select>
-                        <select>
-                            <option>05</option>
-                        </select>
-                        <select>
-                            <option>2005</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Sex:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="sex"> Male</label>
-                        <label><input type="radio" name="sex"> Female</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Current Address:</label>
-                    <input type="text">
-                </div>
-                <div class="form-group">
-                    <label>Create a Password:</label>
-                    <input type="password">
-                </div>
-                <div class="form-group">
-                    <label>Confirm Password:</label>
-                    <input type="password">
-                </div>
-                <button type="submit" class="submit-btn">Submit</button>
-            </form>
-            <div class="login-link">
-                <p>Already have an account? <a href="login_Student.php">Log in Here</a></p>
+    <div class="left-panel">
+        <img src="193b33e5-8839-46b6-98e2-d56d3877a21c_removalai_preview.png" alt="Logo">
+        <h1>Employment Opportunities for College Students at OMSC Mamburao Campus</h1>
+    </div>
+    <div class="right-panel">
+        <h2>Sign Up</h2>
+        <form action="SignUp_Student.php" method="POST">
+            <div class="form-group">
+                <label>Complete Name:</label>
+                <input type="text" name="name" required>
             </div>
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="text" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Birthday:</label>
+                <input type="date" name="birthday" required>
+            </div>
+            <div class="form-group">
+                <label>Sex:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="sex" value="Male" required> Male</label>
+                    <label><input type="radio" name="sex" value="Female" required> Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Current Address:</label>
+                <input type="text" name="address" required>
+            </div>
+            <div class="form-group">
+                <label>Create a Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password:</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="login_Student.php">Log in Here</a></p>
         </div>
     </div>
+</div>
+<?php
+include 'db_students_login-signup.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $birthday = $_POST['birthday'];
+    $sex = $_POST['sex'];
+    $address = $_POST['address'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    
+     
+
+    // Check if passwords match
+    if ($password !== $confirm_password) {
+        die("Passwords do not match.");
+    }
+
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO users (name, phone, email, birthday, sex, address, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $name, $phone, $email, $birthday, $sex, $address, $hashed_password);
+
+    if ($stmt->execute()) {
+        echo "New record created successfully";
+        // Optionally redirect to login page or show a success message
+        header("Location: login_Student.php");
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+?>
 </body>
 </html>
+

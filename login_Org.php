@@ -95,9 +95,38 @@
 .right .signup a span {
     text-decoration: underline;
 }
+.back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            user-select: none;
+            text-decoration: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .back-button img {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
     </style>
 </head>
 <body>
+<a aria-label="Go back" class="back-button" href="Start.php">
+   <img alt="Left arrow icon" height="16" src="back.png" width="16"/>
+  </a>
 <div class="container">
         <div class="left">
             <div class="logo">
@@ -107,21 +136,56 @@
         </div>
         <div class="right">
             <h2>Oraganization <br> Log in</h2>
-            <form>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-            <div class="signup">
-            <p>Already have an account? <a href="SignUp_Org.php">Sign up Here</a></p>
-            </div>
+            <form action="login_Org.php" method="POST">
+    <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit" class="submit-btn">Login</button>
+</form>
+<div class="signup">
+    <p>Don't have an account? <a href="SignUp_Org.php">Sign up Here</a></p>
+</div>
         </div>
     </div>
+    <?php
+
+
+include 'db_organization_login-signup.php';
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Fetch user from database
+    $sql = "SELECT * FROM users WHERE email='$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        // Verify password
+        if (password_verify($password, $row['password'])) {
+            // Password is correct, set session variables
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['email'] = $row['email'];
+            echo "Login successful!";
+            // Redirect to a protected page
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            echo "Invalid password.";
+        }
+    } else {
+        echo "No user found with that email.";
+    }
+}
+
+$conn->close();
+?>
 </body>
 </html>

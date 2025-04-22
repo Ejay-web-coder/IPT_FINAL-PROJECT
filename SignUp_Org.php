@@ -136,9 +136,38 @@ background-color: #8E44AD;
 .login-link a:hover {
             text-decoration: underline;
         }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            user-select: none;
+            text-decoration: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .back-button img {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
     </style>
 </head>
 <body>
+<a aria-label="Go back" class="back-button" href="Start.php">
+   <img alt="Left arrow icon" height="16" src="back.png" width="16"/>
+  </a>
 <div class="container">
         <div class="content">
             <div class="left">
@@ -147,52 +176,79 @@ background-color: #8E44AD;
             </div>
             <div class="right">
                 <h2>Sign Up</h2>
-                <form>
-                    <div class="form-group">
-                        <input type="text" placeholder="Company name:">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Organization Name:">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Phone Number:">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Email Address:">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Create a Password:">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Confirm Password:">
-                    </div>
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>Business Registration Certificate:</label>
-                            <label class="file-upload">
-                                <input type="file" name="business_certificate" required>
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Upload a File</span>
-                            </label>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label>Company Logo (Optional):</label>
-                            <label class="file-upload">
-                                <input type="file" name="company_logo">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Upload a File</span>
-                            </label>
-                        </div>
-                    
-                        <button type="submit" class="submit-btn">Submit</button>
-                    </form>
-                </form>
-                <div class="login-link">
-                <p>Already have an account? <a href="login_Org.php">Log in Here</a></p>
-                </div>
+                <form action="SignUp_Org.php" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="text" name="company_name" placeholder="Company name:" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="organization_name" placeholder="Organization Name:" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="phone_number" placeholder="Phone Number:" required>
+    </div>
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email Address:" required>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Create a Password:" required>
+    </div>
+    <div class="form-group">
+        <input type="password" name="confirm_password" placeholder="Confirm Password:" required>
+    </div>
+    <div class="form-group">
+        <label>Business Registration Certificate:</label>
+        <label class="file-upload">
+            <input type="file" name="business_certificate" required>
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Upload a File</span>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Company Logo (Optional):</label>
+        <label class="file-upload">
+            <input type="file" name="company_logo">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Upload a File</span>
+        </label>
+    </div>
+    <button type="submit" class="submit-btn">Submit</button>
+</form>
+<div class="login-link">
+    <p>Already have an account? <a href="login_Org.php">Log in Here</a></p>
+</div>
             </div>
         </div>
     </div>
+    <?php
+    include 'db_organization_login-signup.php';
+
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $company_name = $_POST['company_name'];
+    $organization_name = $_POST['organization_name'];
+    $phone_number = $_POST['phone_number'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
+    $business_certificate = $_FILES['business_certificate']['name'];
+    $company_logo = $_FILES['company_logo']['name'];
+
+    // Move uploaded files to a directory
+    move_uploaded_file($_FILES['business_certificate']['tmp_name'], "uploads/" . $business_certificate);
+    move_uploaded_file($_FILES['company_logo']['tmp_name'], "uploads/" . $company_logo);
+
+    // Insert into database
+    $sql = "INSERT INTO users (company_name, organization_name, phone_number, email, password, business_certificate, company_logo)
+            VALUES ('$company_name', '$organization_name', '$phone_number', '$email', '$password', '$business_certificate', '$company_logo')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+$conn->close();
+?>
 </body>
 </html>
