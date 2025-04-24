@@ -199,8 +199,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     
-     
-
     // Check if passwords match
     if ($password !== $confirm_password) {
         die("Passwords do not match.");
@@ -210,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO users (name, phone, email, birthday, sex, address, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO students (name, phone, email, birthday, sex, address, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssss", $name, $phone, $email, $birthday, $sex, $address, $hashed_password);
 
     if ($stmt->execute()) {

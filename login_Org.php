@@ -175,7 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $row['email'];
             echo "Login successful!";
             // Redirect to a protected page
-            header("Location: dashboard.php");
+            header("Location: organization/Profile.php");
             exit();
         } else {
             echo "Invalid password.";

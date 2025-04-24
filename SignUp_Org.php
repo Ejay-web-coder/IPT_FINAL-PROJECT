@@ -198,7 +198,7 @@ background-color: #8E44AD;
     <div class="form-group">
         <label>Business Registration Certificate:</label>
         <label class="file-upload">
-            <input type="file" name="business_certificate" required>
+            <input type="file" name="business_certificate">
             <i class="fas fa-cloud-upload-alt"></i>
             <span>Upload a File</span>
         </label>

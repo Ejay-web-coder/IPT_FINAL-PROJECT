@@ -237,8 +237,7 @@
 </head>
 <body>
 <?php
-  // Start session if needed
-  session_start();
+
 
   // Check if logout is requested
   $showModal = false;

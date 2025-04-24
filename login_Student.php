@@ -6,7 +6,7 @@
     <title>Login</title>
     <style>
          body {
-    background: url('') no-repeat center center fixed;
+    background: url('online-job-search.jpeg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -160,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Prepare and bind
-    $stmt = $conn->prepare("SELECT password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT password FROM students WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
