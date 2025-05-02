@@ -1,215 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
-<style>
-    body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #fff;
-  }
-     header {
-      background: white;
-      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-      padding: 1.5rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-weight: 800;
-      font-size: 2.5rem;
-      user-select: none;
-    }
-    .logo span:nth-child(1) { color: #818cf8; }
-    .logo span:nth-child(2) { color: #fb923c; }
-    .logo span:nth-child(3) { color: #4ade80; }
-    .logo span:nth-child(4) { color: #0ea5e9; }
-    .logo .fa-search {
-      position: relative;
-      left: -0.25rem;
-      top: -0.25rem;
-      color: #fb923c;
-    }
-    nav a {
-      margin-left: 2rem;
-      text-decoration: none;
-      color: black;
-      font-weight: 500;
-      font-size: 1rem;
-    }
-    nav a.active, nav a.btn-green {
-      background-color: #22c55e;
-      color: white;
-      padding: 0.25rem 1rem;
-      border-radius: 0.375rem;
-      font-weight: 600;
-    }
-    nav a.logout {
-      font-weight: 700;
-    }
-    main {
-    padding: 0 80px 80px 80px;
-  }
-  section.notifications-container {
-    border: 1px solid #D1D5DB;
-    max-width: 768px;
-    padding: 24px;
-  }
-  section.notifications-container h2 {
-    font-size: 20px;
-    margin: 0 0 16px 0;
-  }
-  .notifications-header {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  .notifications-header .left a {
-    color: #3B82F6;
-    text-decoration: none;
-    font-weight: 400;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .notifications-header .left a .badge {
-    background-color: #3B82F6;
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-    border-radius: 9999px;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .notifications-header .right {
-    display: flex;
-    gap: 32px;
-    color: black;
-  }
-  .notifications-header .right a {
-    color: #DC2626;
-    text-decoration: none;
-  }
-  .notification-item {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-  .notification-item .dot {
-    width: 14px;
-    height: 14px;
-    background-color: #0B5394;
-    border-radius: 50%;
-    margin-right: -30px;
-    margin-left: 0;
-  }
-  .notification-item img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 1px solid #D1D5DB;
-    background: white;
-    object-fit: contain;
-  }
-  .notification-item p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 400;
-  }
-  .notification-item.gray-text p {
-    color: #4B5563;
-  }
-  hr {
-    border: none;
-    border-top: 1px solid black;
-    margin: 0 0 24px 80px;
-  }
-  @media (max-width: 768px) {
-    header {
-      flex-wrap: wrap;
-      padding: 24px 24px;
-    }
-    nav {
-      gap: 16px;
-      font-size: 12px;
-      margin-top: 12px;
-      width: 100%;
-      justify-content: center;
-    }
-    main {
-      padding: 0 24px 40px 24px;
-    }
-    section.notifications-container {
-      max-width: 100%;
-      padding: 16px;
-    }
-    .notification-item {
-      gap: 16px;
-    }
-    hr {
-      margin-left: 72px;
-    }
-  }
-</style>
-
-<body>
-<header>
-    <div class="logo" aria-label="EQCS Logo">
-      <span>E</span><span>Q</span><span>C</span><span>S</span>
-      <i class="fas fa-search"></i>
+<body class="bg-white font-sans">
+<?php
+$showModal = isset($_GET['showLogout']) && $_GET['showLogout'] === 'true';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+  header("Location: Start.php"); exit;
+}
+?>
+  <header class="bg-white shadow px-10 py-6 flex justify-between items-center">
+    <div class="flex items-center gap-1 text-4xl font-extrabold select-none">
+      <span class="text-indigo-400">E</span>
+      <span class="text-orange-400">Q</span>
+      <span class="text-green-400">C</span>
+      <span class="text-sky-400">S</span>
+      <i class="fas fa-search text-orange-400 -ml-1 -mt-1"></i>
     </div>
-    <nav aria-label="Primary Navigation">
-      <a href="#" >Profile</a>
-      <a href="#" class="btn-green active">Jobs Post</a>
-      <a href="#">Requirements</a>
-      <a href="#">Manage Application</a>
-      <a href="#">Notification</a>
-      <a href="#" class="logout">Logout</a>
+    <nav class="text-sm font-medium space-x-8">
+      <a href="job_post.php" >Jobs Post</a>
+      <a href="requirements.php">Requirements</a>
+      <a href="manage_application.php">Manage Application</a>
+      <a href="Profile.php">Profile</a>
+      <a href="notification_org.php" class="bg-green-500 text-white px-4 py-1 rounded-md font-semibold">Notification</a>
+      <a href="?showLogout=true" class="font-bold">Logout</a>
     </nav>
   </header>
-<main>
-  <section class="notifications-container" aria-label="Notifications section">
-    <h2>Notifications</h2>
-    <div class="notifications-header">
-      <div class="left">
-        <a href="#">Today <span class="badge" aria-label="3 new notifications">3</span></a>
+
+  <main class="px-6 md:px-20 pb-20">
+    <section class="border border-gray-300 max-w-2xl mx-auto p-6 mt-6">
+      <h2 class="text-xl mb-4 font-semibold">Notifications</h2>
+
+      <div class="flex justify-between items-center text-sm font-normal border-b border-black pb-2 mb-4">
+        <div class="flex items-center gap-2 text-blue-500">
+          <a href="#" class="flex items-center gap-1">
+            Today 
+            <span class="bg-blue-500 text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full">3</span>
+          </a>
+        </div>
+        <div class="flex gap-6 text-black">
+          <span>Previous</span>
+          <span>Mark as read</span>
+          <a href="#" class="text-red-600">Clear all</a>
+        </div>
       </div>
-      <div class="right">
-        <span>previous</span>
-        <span>Mark as read</span>
-        <a href="#">clear all</a>
+
+      <div class="flex items-center gap-6 mb-6">
+        <span class="w-4 h-4 bg-blue-900 rounded-full"></span>
+        <img src="https://placehold.co/60x60/png?text=7-Eleven+Logo" alt="7-Eleven logo" class="w-14 h-14 rounded-full border border-gray-300 bg-white object-contain">
+        <p class="text-base m-0">Congratulations! You've been selected for an interview.</p>
       </div>
-    </div>
-    <div class="notification-item">
-      <span class="dot" aria-hidden="true"></span>
-      <img src="https://placehold.co/60x60/png?text=7-Eleven+Logo" alt="7-Eleven logo in a white circle with thin gray border" />
-      <p>Congratulations! You've been selected for an interview.</p>
-    </div>
-    <hr />
-    <div class="notification-item gray-text">
-      <img src="https://placehold.co/60x60/png?text=BEPER+Logo" alt="BEPER logo in a white circle with thin gray border" />
-      <p>We're sorry, this position has been filled.</p>
-    </div>
-    <hr />
-  </section>
-</main>  
+
+      <hr class="border-t border-black mb-6" />
+
+      <div class="flex items-center gap-6 text-gray-600">
+        <img src="https://placehold.co/60x60/png?text=BEPER+Logo" alt="BEPER logo" class="w-14 h-14 rounded-full border border-gray-300 bg-white object-contain">
+        <p class="text-base m-0">We're sorry, this position has been filled.</p>
+      </div>
+    </section>
+  </main>
+  <?php if ($showModal): ?>
+<div class="fixed inset-0 bg-black bg-opacity-30 z-50"></div>
+<div class="fixed top-1/2 left-1/2 w-80 bg-white border-2 border-blue-500 rounded-lg p-6 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
+  <div class="text-4xl text-black mb-4"><i class="fas fa-sign-out-alt"></i></div>
+  <p class="text-sm mb-6">Are you sure you want to log out?</p>
+  <div class="flex justify-center gap-4">
+    <form method="post"><input type="submit" name="logout" value="Logout" class="text-blue-600 font-bold" /></form>
+    <form method="get"><input type="submit" value="Cancel" class="bg-blue-200 px-4 py-1 rounded font-bold" /></form>
+  </div>
+</div>
+<?php endif; ?>
 </body>
 </html>
-
-
-

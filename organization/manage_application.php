@@ -1,102 +1,77 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Manage Application</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
-  <style>
-    /* Hide the default checkbox */
-    input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid #d1d5db; /* Tailwind gray-300 */
-      border-radius: 4px;
-      cursor: pointer;
-      position: relative;
-      vertical-align: middle;
-      margin-right: 6px;
-      transition: background-color 0.2s, border-color 0.2s;
-    }
-    /* Checked state */
-    input[type="checkbox"]:checked {
-      background-color: #34d399; /* Tailwind emerald-400 */
-      border-color: #34d399;
-    }
-    /* Checkmark */
-    input[type="checkbox"]:checked::after {
-      content: "✔";
-      color: white;
-      font-size: 14px;
-      position: absolute;
-      top: 1px;
-      left: 3px;
-      user-select: none;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body class="bg-white font-sans">
-  <header class="flex items-center justify-start gap-10 px-20 py-8">
-    <div class="flex items-center gap-1">
-      <span class="font-extrabold text-4xl text-indigo-400 select-none">E</span>
-      <span class="font-extrabold text-4xl text-orange-400 select-none">🔍</span>
-      <span class="font-extrabold text-4xl text-emerald-400 select-none">C</span>
-      <span class="font-extrabold text-4xl text-blue-600 select-none">S</span>
+<?php
+$showModal = isset($_GET['showLogout']) && $_GET['showLogout'] === 'true';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+  header("Location: Start.php"); exit;
+}
+?>
+  <header class="bg-white shadow px-10 py-6 flex justify-between items-center">
+    <div class="flex items-center gap-1 text-4xl font-extrabold select-none">
+      <span class="text-indigo-400">E</span>
+      <span class="text-orange-400">Q</span>
+      <span class="text-green-400">C</span>
+      <span class="text-sky-400">S</span>
+      <i class="fas fa-search text-orange-400 -ml-1 -mt-1"></i>
     </div>
-    <nav class="flex items-center gap-8 text-base font-normal text-black">
-      <a href="#" class="hover:underline">Profile</a>
-      <a href="#" class="hover:underline">Post Jobs</a>
-      <a href="#" class="hover:underline">Requirements</a>
-      <a href="#" class="bg-emerald-400 rounded-md px-4 py-1 text-white hover:bg-emerald-500 transition">Manage Application</a>
-      <a href="#" class="hover:underline">Notification</a>
-      <a href="#" class="font-bold hover:underline">Logout</a>
+    <nav class="text-sm font-medium space-x-8">
+      <a href="job_post.php">Jobs Post</a>
+      <a href="requirements.php">Requirements</a>
+      <a href="manage_application.php" class="bg-green-500 text-white px-4 py-1 rounded-md font-semibold">Manage Application</a>
+      <a href="Profile.php">Profile</a>
+      <a href="notification_org.php">Notification</a>
+      <a href="?showLogout=true" class="font-bold">Logout</a>
     </nav>
   </header>
 
-  <main class="px-20">
-    <table class="w-full border border-gray-300 text-sm">
+  <main class="px-20 mt-6">
+    <table class="w-full border text-sm">
       <thead class="bg-gray-200 text-left text-xs font-semibold text-gray-900">
         <tr>
-          <th class="border border-gray-300 px-3 py-2">Student Name</th>
-          <th class="border border-gray-300 px-3 py-2">Resume</th>
-          <th class="border border-gray-300 px-3 py-2">Application Date</th>
-          <th class="border border-gray-300 px-3 py-2">Status</th>
-          <th class="border border-gray-300 px-3 py-2">Action</th>
+          <th class="border px-3 py-2">Student Name</th>
+          <th class="border px-3 py-2">Resume</th>
+          <th class="border px-3 py-2">Application Date</th>
+          <th class="border px-3 py-2">Status</th>
+          <th class="border px-3 py-2">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="border border-gray-300 px-3 py-1">Chrisnaire Jake Allado</td>
-          <td class="border border-gray-300 px-3 py-1 text-blue-500 flex items-center gap-1">
+        <tr class="border">
+          <td class="px-3 py-2">Chrisnaire Jake Allado</td>
+          <td class="px-3 py-2 text-blue-500 flex items-center gap-1">
             <i class="fas fa-paperclip"></i>
             <a href="#" class="hover:underline">View Resume</a>
           </td>
-          <td class="border border-gray-300 px-3 py-1">March 30, 2025</td>
-          <td class="border border-gray-300 px-3 py-1">Pending</td>
-          <td class="border border-gray-300 px-3 py-1 flex items-center">
-            <label class="flex items-center cursor-pointer select-none">
-              <input type="checkbox" checked />
+          <td class="px-3 py-2">March 30, 2025</td>
+          <td class="px-3 py-2">Pending</td>
+          <td class="px-3 py-2">
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4 text-emerald-500 border-gray-300 rounded" checked>
               <span>Approved</span>
             </label>
           </td>
         </tr>
-        <tr>
-          <td class="border border-gray-300 px-3 py-1">Chrisnaire Jake Allado</td>
-          <td class="border border-gray-300 px-3 py-1 text-blue-500 flex items-center gap-1">
+
+        <!-- Duplicate row -->
+        <tr class="border">
+          <td class="px-3 py-2">Chrisnaire Jake Allado</td>
+          <td class="px-3 py-2 text-blue-500 flex items-center gap-1">
             <i class="fas fa-paperclip"></i>
             <a href="#" class="hover:underline">View Resume</a>
           </td>
-          <td class="border border-gray-300 px-3 py-1">March 30, 2025</td>
-          <td class="border border-gray-300 px-3 py-1">Pending</td>
-          <td class="border border-gray-300 px-3 py-1 flex items-center">
-            <label class="flex items-center cursor-pointer select-none">
-              <input type="checkbox" checked />
+          <td class="px-3 py-2">March 30, 2025</td>
+          <td class="px-3 py-2">Pending</td>
+          <td class="px-3 py-2">
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" class="w-4 h-4 text-emerald-500 border-gray-300 rounded" checked>
               <span>Approved</span>
             </label>
           </td>
@@ -113,5 +88,16 @@
       </button>
     </div>
   </main>
+  <?php if ($showModal): ?>
+<div class="fixed inset-0 bg-black bg-opacity-30 z-50"></div>
+<div class="fixed top-1/2 left-1/2 w-80 bg-white border-2 border-blue-500 rounded-lg p-6 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
+  <div class="text-4xl text-black mb-4"><i class="fas fa-sign-out-alt"></i></div>
+  <p class="text-sm mb-6">Are you sure you want to log out?</p>
+  <div class="flex justify-center gap-4">
+    <form method="post"><input type="submit" name="logout" value="Logout" class="text-blue-600 font-bold" /></form>
+    <form method="get"><input type="submit" value="Cancel" class="bg-blue-200 px-4 py-1 rounded font-bold" /></form>
+  </div>
+</div>
+<?php endif; ?>
 </body>
 </html>
