@@ -11,7 +11,7 @@
 <?php
 $showModal = isset($_GET['showLogout']) && $_GET['showLogout'] === 'true';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-  header("Location: ../homepage.php"); exit;
+  header("Location: ../../homepage.php"); exit;
 }
 ?>
 <header class="flex justify-between items-center bg-white shadow px-6 py-4">

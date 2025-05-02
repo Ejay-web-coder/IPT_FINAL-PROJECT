@@ -2,7 +2,7 @@ function validateLogin() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    axios.post('../connection/login_admin.php', {
+    axios.post('../controllers/login_admin.php', {
         uname: email,
         pword: password
     }).then( (response) => {

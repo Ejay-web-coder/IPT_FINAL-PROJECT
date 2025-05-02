@@ -124,7 +124,7 @@
     </style>
 </head>
 <body>
-<a aria-label="Go back" class="back-button" href="Start.php">
+<a aria-label="Go back" class="back-button" href="../homepage.php">
    <img alt="Left arrow icon" height="16" src="../image/back.png" width="16"/>
   </a>
 <div class="container">
@@ -148,7 +148,7 @@
     <button type="submit" class="submit-btn">Login</button>
 </form>
 <div class="signup">
-    <p>Don't have an account? <a href="../Login_signup/SignUp_Student.php">Sign up Here</a></p>
+    <p>Don't have an account? <a href="../Login_signup/SignUp_Org.php">Sign up Here</a></p>
 </div>
         </div>
     </div>
@@ -175,7 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $row['email'];
             echo "Login successful!";
             // Redirect to a protected page
-            header("Location: organization/Profile.php");
+            header("Location: ../organization/Profile.php");
             exit();
         } else {
             echo "Invalid password.";
