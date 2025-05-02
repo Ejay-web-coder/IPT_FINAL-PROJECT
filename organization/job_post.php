@@ -11,7 +11,7 @@
 <?php
 $showModal = isset($_GET['showLogout']) && $_GET['showLogout'] === 'true';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-  header("Location: ../../homepage.php"); exit;
+  header("Location: ../homepage.php"); exit;
 }
 ?>
   <header class="bg-white shadow px-10 py-6 flex justify-between items-center">
@@ -23,10 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
       <i class="fas fa-search text-orange-400 -ml-1 -mt-1"></i>
     </div>
     <nav class="text-sm font-medium space-x-8">
+      <a href="Profile.php">Profile</a>
       <a href="job_post.php" class="bg-green-500 text-white px-4 py-1 rounded-md font-semibold">Jobs Post</a>
       <a href="requirements.php">Requirements</a>
       <a href="manage_application.php">Manage Application</a>
-      <a href="Profile.php">Profile</a>
       <a href="notification_org.php">Notification</a>
       <a href="?showLogout=true" class="font-bold">Logout</a>
     </nav>
